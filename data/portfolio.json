@@ -1,0 +1,193 @@
+{
+  "settings": {
+    "name": "Asep Hernandi",
+    "email": "asephernand@email.com",
+    "whatsapp": "6281234567890",
+    "github": "https://github.com/hernandizz",
+    "linkedin": "https://linkedin.com/in/Asep Hernandi",
+    "instagram": "https://instagram.com/hernandes",
+    "tagline": "Crafting digital excellence, one project at a time."
+  },
+  "hero": {
+    "headline": "Membangun Produk Digital",
+    "headlineAccent": "yang Elegan",
+    "headlineSuffix": "& Fungsional",
+    "subheadline": "Full-Stack Developer & AI Enthusiast — merancang solusi digital yang bersih, efisien, dan berdampak nyata.",
+    "ctaText": "Explore My Work",
+    "ctaLink": "#projects",
+    "badgeLeft": {
+      "label": "Available for",
+      "value": "Freelance"
+    },
+    "badgeRight": {
+      "label": "Projects Done",
+      "value": "20+"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      "Saya <strong>Hernandes</strong>, mahasiswa Informatika di UNISSULA yang passionate di bidang pengembangan web, kecerdasan buatan, dan desain produk digital.",
+      "Dengan pengalaman lebih dari 3 tahun mengerjakan proyek riil — mulai dari sistem informasi, chatbot berbasis RAG & HID, hingga landing page berkualitas tinggi — saya percaya bahwa teknologi terbaik adalah yang menyelesaikan masalah nyata dengan cara yang elegan.",
+      "Di waktu luang, saya mendalami riset AI, kontribusi open-source, dan eksplorasi desain UI/UX. Filosofi saya sederhana: <em>\"Kode yang baik adalah kode yang tidak perlu ditulis.\"</em>"
+    ],
+    "stats": [
+      {
+        "value": 4,
+        "suffix": "+",
+        "label": "Tahun Pengalaman"
+      },
+      {
+        "value": 20,
+        "suffix": "+",
+        "label": "Proyek Selesai"
+      },
+      {
+        "value": 98,
+        "suffix": "%",
+        "label": "Kepuasan Klien"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "Frontend",
+      "detail": "React, Next.js, Vue, HTML/CSS, Tailwind",
+      "icon": "code"
+    },
+    {
+      "name": "Backend",
+      "detail": "Node.js, Python, FastAPI, Laravel, REST API",
+      "icon": "server"
+    },
+    {
+      "name": "Database",
+      "detail": "PostgreSQL, MySQL, MongoDB, Firebase",
+      "icon": "database"
+    },
+    {
+      "name": "AI / ML",
+      "detail": "LangChain, RAG, HID, TensorFlow, OpenAI",
+      "icon": "layers"
+    },
+    {
+      "name": "DevOps",
+      "detail": "Docker, Git, CI/CD, Linux, Vercel",
+      "icon": "settings"
+    },
+    {
+      "name": "Design",
+      "detail": "Figma, Adobe XD, UI/UX Research",
+      "icon": "pen"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Chatbot Helpdesk Berbasis RAG & HID",
+      "shortDesc": "Sistem chatbot cerdas untuk helpdesk kampus yang memanfaatkan RAG dan HID untuk menjawab pertanyaan mahasiswa dengan akurasi tinggi.",
+      "fullDesc": "Sistem chatbot cerdas untuk helpdesk kampus yang memanfaatkan Retrieval-Augmented Generation (RAG) dan Hierarchical Information Decomposition (HID) untuk menjawab pertanyaan mahasiswa dengan akurasi tinggi berdasarkan dokumen internal. Sistem ini mampu memproses dokumen PDF, melakukan chunking hierarkis, dan menghasilkan jawaban kontekstual yang akurat.",
+      "tags": [
+        "Python",
+        "LangChain",
+        "FastAPI",
+        "RAG"
+      ],
+      "year": "2024",
+      "role": "Lead Developer & Researcher",
+      "duration": "6 Bulan",
+      "status": "Completed",
+      "live": "#",
+      "repo": "https://github.com/hernandizz",
+      "featured": true
+    },
+    {
+      "title": "Platform E-Commerce Modern",
+      "shortDesc": "Marketplace dengan fitur real-time chat, payment gateway, dan dashboard analytics.",
+      "fullDesc": "Marketplace full-stack dengan fitur real-time chat antara buyer dan seller, integrasi payment gateway (Midtrans), dashboard analytics untuk merchant, serta sistem review dan rating. Dibangun dengan arsitektur microservice untuk skalabilitas tinggi.",
+      "tags": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      "year": "2024",
+      "role": "Full-Stack Developer",
+      "duration": "4 Bulan",
+      "status": "Live",
+      "live": "#",
+      "repo": "https://github.com/hernandizz",
+      "featured": false
+    },
+    {
+      "title": "Sistem Informasi Akademik",
+      "shortDesc": "Manajemen data mahasiswa, jadwal kuliah, dan nilai terintegrasi dengan role-based access.",
+      "fullDesc": "Sistem manajemen data akademik terintegrasi yang mencakup pengelolaan data mahasiswa, penjadwalan kuliah otomatis, input nilai, dan generate transkrip. Dilengkapi role-based access control untuk admin, dosen, dan mahasiswa.",
+      "tags": [
+        "Laravel",
+        "MySQL",
+        "Bootstrap"
+      ],
+      "year": "2023",
+      "role": "Backend Developer",
+      "duration": "3 Bulan",
+      "status": "Deployed",
+      "live": "#",
+      "repo": "https://github.com/hernandizz",
+      "featured": false
+    },
+    {
+      "title": "Dashboard Analitik AI",
+      "shortDesc": "Visualisasi data prediktif menggunakan machine learning untuk insight bisnis real-time.",
+      "fullDesc": "Dashboard visualisasi data prediktif yang menggunakan model machine learning untuk memberikan insight bisnis real-time. Fitur utama meliputi forecasting penjualan, analisis sentimen customer, dan automated reporting.",
+      "tags": [
+        "Next.js",
+        "Python",
+        "TensorFlow"
+      ],
+      "year": "2024",
+      "role": "AI/ML Engineer",
+      "duration": "5 Bulan",
+      "status": "In Progress",
+      "live": "#",
+      "repo": "https://github.com/hernandizz",
+      "featured": false
+    },
+    {
+      "title": "Website Company Profile",
+      "shortDesc": "Landing page premium dengan animasi smooth, glassmorphism, dan performa optimal.",
+      "fullDesc": "Landing page premium untuk perusahaan teknologi dengan animasi GSAP yang smooth, glassmorphism, lazy loading images, dan performa Lighthouse score 95+. Responsive di semua device.",
+      "tags": [
+        "HTML/CSS",
+        "JavaScript",
+        "GSAP"
+      ],
+      "year": "2023",
+      "role": "Frontend Developer",
+      "duration": "2 Bulan",
+      "status": "Live",
+      "live": "#",
+      "repo": "https://github.com/hernandizz",
+      "featured": false
+    }
+  ],
+  "experience": [
+    {
+      "date": "2024 — Sekarang",
+      "title": "Freelance Full-Stack Developer",
+      "desc": "Mengerjakan proyek web app, landing page, dan integrasi AI untuk klien lokal dan internasional."
+    },
+    {
+      "date": "2023 — 2024",
+      "title": "Asisten Riset — Lab AI UNISSULA",
+      "desc": "Penelitian chatbot HID+RAG, preprocessing dokumen, dan evaluasi akurasi retrieval system."
+    },
+    {
+      "date": "2022 — 2023",
+      "title": "Web Developer — Organisasi Kampus",
+      "desc": "Membangun dan mengelola website organisasi kemahasiswaan dengan fitur event management."
+    },
+    {
+      "date": "2021",
+      "title": "Mahasiswa Informatika — UNISSULA",
+      "desc": "Memulai perjalanan di bidang ilmu komputer, fokus pada pemrograman web dan kecerdasan buatan."
+    }
+  ]
+}
