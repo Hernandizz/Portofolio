@@ -18,8 +18,9 @@ app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 * 4 } // 4 hours
 }));
 
-// Static files — serve /public as root
+// Static files — serve /public as root, and /assets from root assets folder as fallback
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 // ─── Helpers ───
 function readData() {

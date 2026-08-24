@@ -129,6 +129,7 @@ function populateAllForms() {
   // Settings
   const s = adminData.settings || {};
   document.getElementById('settingName').value = s.name || '';
+  document.getElementById('settingPhoto').value = s.photo || 'assets/profile.jpg';
   document.getElementById('settingEmail').value = s.email || '';
   document.getElementById('settingWhatsapp').value = s.whatsapp || '';
   document.getElementById('settingGithub').value = s.github || '';
@@ -461,6 +462,7 @@ async function saveAllChanges() {
   // Read current input values
   adminData.settings = {
     name: document.getElementById('settingName').value.trim(),
+    photo: document.getElementById('settingPhoto').value.trim() || 'assets/profile.jpg',
     email: document.getElementById('settingEmail').value.trim(),
     whatsapp: document.getElementById('settingWhatsapp').value.trim(),
     github: document.getElementById('settingGithub').value.trim(),

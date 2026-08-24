@@ -54,6 +54,19 @@ function renderContent(data) {
     document.title = `${name} — Portfolio`;
     document.querySelectorAll('#navLogo, #footerLogo').forEach(el => el.textContent = name);
     document.querySelectorAll('#heroInitials, #aboutInitials').forEach(el => el.textContent = initials);
+
+    if (data.settings.photo) {
+      const heroPhoto = document.getElementById('heroPhoto');
+      if (heroPhoto) {
+        heroPhoto.src = data.settings.photo;
+        heroPhoto.style.display = 'block';
+      }
+      const aboutPhoto = document.getElementById('aboutPhoto');
+      if (aboutPhoto) {
+        aboutPhoto.src = data.settings.photo;
+        aboutPhoto.style.display = 'block';
+      }
+    }
     
     if (data.settings.tagline) {
       const taglineEl = document.getElementById('footerTagline');
