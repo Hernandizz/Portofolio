@@ -139,15 +139,31 @@ function populateAllForms() {
 
   // Hero
   const h = adminData.hero || {};
-  document.getElementById('heroHeadline').value = h.headline || '';
-  document.getElementById('heroHeadlineAccent').value = h.headlineAccent || '';
-  document.getElementById('heroHeadlineSuffix').value = h.headlineSuffix || '';
-  document.getElementById('heroSubheadline').value = h.subheadline || '';
-  document.getElementById('heroCtaText').value = h.ctaText || '';
-  document.getElementById('badgeLeftLabel').value = (h.badgeLeft && h.badgeLeft.label) || '';
-  document.getElementById('badgeLeftValue').value = (h.badgeLeft && h.badgeLeft.value) || '';
-  document.getElementById('badgeRightLabel').value = (h.badgeRight && h.badgeRight.label) || '';
-  document.getElementById('badgeRightValue').value = (h.badgeRight && h.badgeRight.value) || '';
+  const brandInput = document.getElementById('heroBrandTitleInput');
+  if (brandInput) brandInput.value = h.brandTitle || h.headline || '';
+
+  const imgInput = document.getElementById('heroImageInput');
+  if (imgInput) imgInput.value = h.heroImage || 'assets/stone_hero.jpg';
+
+  const subLeftInput = document.getElementById('heroBrandSubtitleLeft');
+  if (subLeftInput) subLeftInput.value = h.brandSubtitleLeft || 'YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS';
+
+  const statRightInput = document.getElementById('heroBrandStatRight');
+  if (statRightInput) statRightInput.value = h.brandStatRight || 'OVER TIME\n+ 20+ SHIPPED PROJECTS';
+
+  const techInput = document.getElementById('heroFloatingTechInput');
+  if (techInput) {
+    techInput.value = Array.isArray(h.floatingTech) ? h.floatingTech.join(', ') : 'React, Next.js, Python AI, Node.js, FastAPI, PostgreSQL, Tailwind, Docker';
+  }
+
+  const subheadInput = document.getElementById('heroSubheadline');
+  if (subheadInput) subheadInput.value = h.subheadline || '';
+
+  const ctaTextInput = document.getElementById('heroCtaText');
+  if (ctaTextInput) ctaTextInput.value = h.ctaText || 'Explore Works';
+
+  const ctaLinkInput = document.getElementById('heroCtaLink');
+  if (ctaLinkInput) ctaLinkInput.value = h.ctaLink || '#projects';
 
   // About Paragraphs & Stats
   renderAboutParagraphs();
@@ -471,21 +487,20 @@ async function saveAllChanges() {
     tagline: document.getElementById('settingTagline').value.trim()
   };
 
+  const techRaw = (document.getElementById('heroFloatingTechInput')?.value || '')
+    .split(',')
+    .map(t => t.trim())
+    .filter(Boolean);
+
   adminData.hero = {
-    headline: document.getElementById('heroHeadline').value.trim(),
-    headlineAccent: document.getElementById('heroHeadlineAccent').value.trim(),
-    headlineSuffix: document.getElementById('heroHeadlineSuffix').value.trim(),
-    subheadline: document.getElementById('heroSubheadline').value.trim(),
-    ctaText: document.getElementById('heroCtaText').value.trim(),
-    ctaLink: '#projects',
-    badgeLeft: {
-      label: document.getElementById('badgeLeftLabel').value.trim(),
-      value: document.getElementById('badgeLeftValue').value.trim()
-    },
-    badgeRight: {
-      label: document.getElementById('badgeRightLabel').value.trim(),
-      value: document.getElementById('badgeRightValue').value.trim()
-    }
+    brandTitle: document.getElementById('heroBrandTitleInput')?.value.trim() || 'Hernandes',
+    heroImage: document.getElementById('heroImageInput')?.value.trim() || 'assets/stone_hero.jpg',
+    brandSubtitleLeft: document.getElementById('heroBrandSubtitleLeft')?.value.trim() || 'YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS',
+    brandStatRight: document.getElementById('heroBrandStatRight')?.value.trim() || 'OVER TIME\n+ 20+ SHIPPED PROJECTS',
+    floatingTech: techRaw.length ? techRaw : ['React', 'Next.js', 'Python AI', 'Node.js', 'FastAPI', 'PostgreSQL', 'Tailwind', 'Docker'],
+    subheadline: document.getElementById('heroSubheadline')?.value.trim() || '',
+    ctaText: document.getElementById('heroCtaText')?.value.trim() || 'Explore Works',
+    ctaLink: document.getElementById('heroCtaLink')?.value.trim() || '#projects'
   };
 
   // Collect updated about paragraphs from textareas

@@ -7,15 +7,26 @@
     "github": "https://github.com/hernandizz",
     "linkedin": "https://linkedin.com/in/Asep Hernandi",
     "instagram": "https://instagram.com/hernandes",
-    "tagline": "Crafting digital excellence, one project at a time."
+    "tagline": "Architecting High-Performance Digital Experiences & AI Solutions."
   },
   "hero": {
-    "headline": "Membangun Produk Digital",
-    "headlineAccent": "yang Elegan",
-    "headlineSuffix": "& Fungsional",
-    "subheadline": "Full-Stack Developer & AI Enthusiast — merancang solusi digital yang bersih, efisien, dan berdampak nyata.",
-    "ctaText": "Explore My Work",
+    "brandTitle": "Hernandes",
+    "brandSubtitleLeft": "YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS",
+    "brandStatRight": "OVER TIME\n+ 20+ SHIPPED PROJECTS",
+    "subheadline": "Full-Stack Developer & AI Systems Specialist — merancang arsitektur digital berpresisi tinggi, solusi kecerdasan buatan, dan antarmuka web berkelas dunia.",
+    "ctaText": "Explore Works",
     "ctaLink": "#projects",
+    "heroImage": "assets/stone_hero.jpg",
+    "floatingTech": [
+      "React",
+      "Next.js",
+      "Python AI",
+      "Node.js",
+      "FastAPI",
+      "PostgreSQL",
+      "Tailwind",
+      "Docker"
+    ],
     "badgeLeft": {
       "label": "Available for",
       "value": "Freelance"
