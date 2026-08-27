@@ -11,12 +11,9 @@
   },
   "hero": {
     "brandTitle": "Hernandes",
+    "heroImage": "assets/stone_hero.jpg",
     "brandSubtitleLeft": "YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS",
     "brandStatRight": "OVER TIME\n+ 20+ SHIPPED PROJECTS",
-    "subheadline": "Full-Stack Developer & AI Systems Specialist — merancang arsitektur digital berpresisi tinggi, solusi kecerdasan buatan, dan antarmuka web berkelas dunia.",
-    "ctaText": "Explore Works",
-    "ctaLink": "#projects",
-    "heroImage": "assets/stone_hero.jpg",
     "floatingTech": [
       "React",
       "Next.js",
@@ -27,14 +24,9 @@
       "Tailwind",
       "Docker"
     ],
-    "badgeLeft": {
-      "label": "Available for",
-      "value": "Freelance"
-    },
-    "badgeRight": {
-      "label": "Projects Done",
-      "value": "20+"
-    }
+    "subheadline": "Full-Stack Developer & AI Systems Specialist — merancang arsitektur digital berpresisi tinggi, solusi kecerdasan buatan, dan antarmuka web berkelas dunia.",
+    "ctaText": "Explore Works",
+    "ctaLink": "#projects"
   },
   "about": {
     "paragraphs": [
@@ -107,6 +99,7 @@
       "role": "Lead Developer & Researcher",
       "duration": "6 Bulan",
       "status": "Completed",
+      "image": "assets/projects/project_rag.jpg",
       "live": "#",
       "repo": "https://github.com/hernandizz",
       "featured": true
@@ -124,6 +117,7 @@
       "role": "Full-Stack Developer",
       "duration": "4 Bulan",
       "status": "Live",
+      "image": "assets/projects/project_ecommerce.jpg",
       "live": "#",
       "repo": "https://github.com/hernandizz",
       "featured": false
@@ -141,6 +135,7 @@
       "role": "Backend Developer",
       "duration": "3 Bulan",
       "status": "Deployed",
+      "image": "assets/projects/project_academic.jpg",
       "live": "#",
       "repo": "https://github.com/hernandizz",
       "featured": false
@@ -158,23 +153,7 @@
       "role": "AI/ML Engineer",
       "duration": "5 Bulan",
       "status": "In Progress",
-      "live": "#",
-      "repo": "https://github.com/hernandizz",
-      "featured": false
-    },
-    {
-      "title": "Website Company Profile",
-      "shortDesc": "Landing page premium dengan animasi smooth, glassmorphism, dan performa optimal.",
-      "fullDesc": "Landing page premium untuk perusahaan teknologi dengan animasi GSAP yang smooth, glassmorphism, lazy loading images, dan performa Lighthouse score 95+. Responsive di semua device.",
-      "tags": [
-        "HTML/CSS",
-        "JavaScript",
-        "GSAP"
-      ],
-      "year": "2023",
-      "role": "Frontend Developer",
-      "duration": "2 Bulan",
-      "status": "Live",
+      "image": "assets/projects/project_dashboard.jpg",
       "live": "#",
       "repo": "https://github.com/hernandizz",
       "featured": false

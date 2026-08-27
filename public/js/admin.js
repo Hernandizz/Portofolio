@@ -367,6 +367,7 @@ function initProjectModal() {
       shortDesc: document.getElementById('projShortDesc').value.trim(),
       fullDesc: document.getElementById('projFullDesc').value.trim(),
       tags: tagsArr,
+      image: document.getElementById('projImage').value.trim() || 'assets/projects/project_rag.jpg',
       year: document.getElementById('projYear').value.trim(),
       role: document.getElementById('projRole').value.trim(),
       duration: document.getElementById('projDuration').value.trim(),
@@ -399,6 +400,7 @@ function openProjectEditModal(idx) {
     document.getElementById('projShortDesc').value = '';
     document.getElementById('projFullDesc').value = '';
     document.getElementById('projTags').value = '';
+    document.getElementById('projImage').value = '';
     document.getElementById('projYear').value = new Date().getFullYear();
     document.getElementById('projRole').value = 'Developer';
     document.getElementById('projDuration').value = '';
@@ -413,6 +415,7 @@ function openProjectEditModal(idx) {
     document.getElementById('projShortDesc').value = p.shortDesc || '';
     document.getElementById('projFullDesc').value = p.fullDesc || '';
     document.getElementById('projTags').value = (p.tags || []).join(', ');
+    document.getElementById('projImage').value = p.image || '';
     document.getElementById('projYear').value = p.year || '';
     document.getElementById('projRole').value = p.role || '';
     document.getElementById('projDuration').value = p.duration || '';

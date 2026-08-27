@@ -1,13 +1,18 @@
 /* ══════════════════════════════════════════════
-   PORTFOLIO — Dynamic Client Script (Dark Mineral)
-   Fetches content from /api/data, hydrates DOM,
-   handles 3D stone physics, Devicon running marquee,
-   modal, scroll animations, counters & nav
+   HERNANDES PORTFOLIO — DESIGN 3 CLIENT SCRIPT
+   - Lenis Smooth Inertia Momentum Scroll Engine
+   - Storytelling Chapter HUD & Read Progress
+   - Ambient Cosmic Particle Canvas & Spotlight
+   - Hero Parallax & 3D Stone Inertia Physics
+   - Luminous Timeline Laser Beam Tracking
+   - Velocity-Reactive Running Tech Marquee
+   - High-Fidelity Project Artwork Mockups & Modal
    ══════════════════════════════════════════════ */
 
-// Global in-memory data store
+// Global State
 let portfolioData = null;
 let projectsList = [];
+let lenis = null;
 
 // Devicon Class Lookup Map for Tech Stack
 const deviconMap = {
@@ -55,7 +60,7 @@ function getDeviconClass(techName) {
   return deviconMap[key] || 'devicon-codeigniter-plain colored';
 }
 
-// SVG Icon library for category skill cards
+// Category skill icons
 const iconLibrary = {
   code: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
   server: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
@@ -67,17 +72,130 @@ const iconLibrary = {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
+  initLenis();
+  initAmbientCanvas();
+  initCursorSpotlight();
   await loadPortfolioData();
   initNavbar();
   initMobileMenu();
   initModal();
   initSmoothNav();
   initStone3DPhysics();
+  initScrollParallax();
+  initTimelineLaser();
   initScrollReveal();
   initStatCounter();
 });
 
-// ─── Fetch & Render ───
+// ─── 1. Lenis Smooth Momentum Scroll Engine ───
+function initLenis() {
+  if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 1.5,
+      infinite: false
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  } else {
+    console.log('Lenis CDN fallback: using native smooth scrolling');
+  }
+}
+
+// ─── 2. Ambient Particle Canvas Engine ───
+function initAmbientCanvas() {
+  const canvas = document.getElementById('ambientCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const particles = [];
+  const particleCount = Math.min(Math.floor(window.innerWidth / 28), 50);
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.45 + 0.15,
+      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: (Math.random() - 0.5) * 0.25,
+      isGold: Math.random() > 0.6
+    });
+  }
+
+  function renderParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      if (p.x < 0) p.x = width;
+      if (p.x > width) p.x = 0;
+      if (p.y < 0) p.y = height;
+      if (p.y > height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.isGold
+        ? `rgba(212, 175, 55, ${p.alpha})`
+        : `rgba(255, 255, 255, ${p.alpha * 0.7})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(renderParticles);
+  }
+
+  renderParticles();
+}
+
+// ─── 3. Interactive Cursor Spotlight / Flashlight ───
+function initCursorSpotlight() {
+  const glow = document.getElementById('cursorGlow');
+  if (!glow || window.matchMedia('(pointer: coarse)').matches) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    document.body.classList.add('cursor-active');
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-active');
+  });
+
+  function animateSpotlight() {
+    currentX += (mouseX - currentX) * 0.12;
+    currentY += (mouseY - currentY) * 0.12;
+    glow.style.transform = `translate(${currentX.toFixed(1)}px, ${currentY.toFixed(1)}px)`;
+    requestAnimationFrame(animateSpotlight);
+  }
+  animateSpotlight();
+}
+
+// ─── 4. Fetch & Render Content ───
 async function loadPortfolioData() {
   try {
     const res = await fetch('/api/data');
@@ -96,22 +214,20 @@ function renderContent(data) {
   // Settings & Branding
   if (data.settings) {
     const name = data.settings.name || 'HERNANDES.';
-    
     document.title = `${name} — Portfolio`;
     document.querySelectorAll('#navLogo, #footerLogo').forEach(el => el.textContent = name);
 
-    // Profile photo (updated dark studio version)
     const aboutPhoto = document.getElementById('aboutPhoto');
     if (aboutPhoto) {
       aboutPhoto.src = data.settings.photo || 'assets/profile.jpg';
       aboutPhoto.style.display = 'block';
     }
-    
+
     if (data.settings.tagline) {
       const taglineEl = document.getElementById('footerTagline');
       if (taglineEl) taglineEl.innerHTML = data.settings.tagline.replace('\n', '<br>');
     }
-    
+
     if (data.settings.email) {
       const emailEl = document.getElementById('ctaEmail');
       if (emailEl) emailEl.href = `mailto:${data.settings.email}`;
@@ -132,32 +248,27 @@ function renderContent(data) {
       const igEl = document.getElementById('socialInstagram');
       if (igEl) igEl.href = data.settings.instagram;
     }
-    
+
     const year = new Date().getFullYear();
     const copyEl = document.getElementById('footerCopyright');
     if (copyEl) copyEl.innerHTML = `&copy; ${year} ${name.replace(/\.$/, '')}. All rights reserved.`;
   }
 
-  // Hero Section (Reference Composition)
+  // Hero Section
   if (data.hero) {
-    // Brand Title Headline
     const brandTitleEl = document.getElementById('heroBrandTitle');
     if (brandTitleEl) {
-      const brand = data.hero.brandTitle || data.settings?.name || 'Hernandes';
-      brandTitleEl.textContent = brand;
+      brandTitleEl.textContent = data.hero.brandTitle || data.settings?.name || 'Hernandes';
     }
 
-    // Hero Stone Image
     const stoneImgEl = document.getElementById('heroStoneImg');
     if (stoneImgEl && data.hero.heroImage) {
       stoneImgEl.src = data.hero.heroImage;
     }
 
-    // Hero Subtitle & Captions
     const subEl = document.getElementById('heroSub');
     if (subEl) subEl.textContent = data.hero.subheadline || '';
 
-    // Microtext Left & Right
     const leftEl = document.getElementById('brandSubLeft');
     if (leftEl && data.hero.brandSubtitleLeft) {
       const parts = data.hero.brandSubtitleLeft.split('\n');
@@ -176,14 +287,12 @@ function renderContent(data) {
       `;
     }
 
-    // CTA Button
     const ctaEl = document.getElementById('heroCta');
     if (ctaEl && data.hero.ctaText) {
       ctaEl.querySelector('span').textContent = data.hero.ctaText;
       ctaEl.href = data.hero.ctaLink || '#projects';
     }
 
-    // Render Tech Stack Running Marquee
     renderTechMarquee(data.hero.floatingTech || [
       'React', 'Next.js', 'Python AI', 'Node.js', 'FastAPI', 'PostgreSQL', 'Tailwind', 'Docker', 'TypeScript', 'MongoDB', 'Git', 'Figma'
     ]);
@@ -217,7 +326,7 @@ function renderContent(data) {
     const skillsGrid = document.getElementById('skillsGrid');
     if (skillsGrid) {
       skillsGrid.innerHTML = data.skills.map(s => `
-        <div class="skill-card">
+        <div class="skill-card" data-scroll-reveal>
           <div class="skill-icon">
             ${iconLibrary[s.icon] || iconLibrary.default}
           </div>
@@ -228,7 +337,7 @@ function renderContent(data) {
     }
   }
 
-  // Projects Section
+  // Projects Section (Rendered with real Artwork)
   if (Array.isArray(data.projects)) {
     const featured = data.projects.find(p => p.featured) || data.projects[0];
     const rest = data.projects.filter(p => p !== featured);
@@ -236,13 +345,13 @@ function renderContent(data) {
     const featuredContainer = document.getElementById('projectFeaturedContainer');
     if (featuredContainer && featured) {
       const featuredIndex = data.projects.indexOf(featured);
+      const featuredImg = featured.image || 'assets/projects/project_rag.jpg';
       featuredContainer.innerHTML = `
         <div class="project-featured" onclick="openProjectModal(${featuredIndex})">
-          <div class="project-featured-img">
-            <div class="project-placeholder">
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0022 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-              <span>${escapeHtml(featured.title)}</span>
-            </div>
+          <div class="project-featured-img-wrap">
+            <img src="${featuredImg}" alt="${escapeHtml(featured.title)}" class="project-thumb-img" onerror="this.src='assets/projects/project_rag.jpg'">
+            <div class="project-img-overlay"></div>
+            <div class="project-badge-pill">FEATURED ARCHITECTURE</div>
           </div>
           <div class="project-featured-info">
             <div class="project-tags">
@@ -252,7 +361,7 @@ function renderContent(data) {
             <p>${escapeHtml(featured.shortDesc || featured.fullDesc || '')}</p>
             <div>
               <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); openProjectModal(${featuredIndex});">
-                Lihat Detail
+                Lihat Case Study
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
             </div>
@@ -265,13 +374,12 @@ function renderContent(data) {
     if (projectsGrid) {
       projectsGrid.innerHTML = rest.map(p => {
         const idx = data.projects.indexOf(p);
+        const pImg = p.image || 'assets/projects/project_ecommerce.jpg';
         return `
-          <div class="project-card" onclick="openProjectModal(${idx})">
-            <div class="project-card-img">
-              <div class="project-placeholder small">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>${escapeHtml(p.title)}</span>
-              </div>
+          <div class="project-card" data-scroll-reveal onclick="openProjectModal(${idx})">
+            <div class="project-card-img-wrap">
+              <img src="${pImg}" alt="${escapeHtml(p.title)}" class="project-thumb-img" onerror="this.src='assets/projects/project_dashboard.jpg'">
+              <div class="project-img-overlay"></div>
             </div>
             <div class="project-card-body">
               <div class="project-tags">
@@ -281,7 +389,7 @@ function renderContent(data) {
               <p>${escapeHtml(p.shortDesc || p.fullDesc || '')}</p>
             </div>
             <div class="project-card-footer">
-              <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); openProjectModal(${idx});">Lihat Detail →</button>
+              <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); openProjectModal(${idx});">Explore Details →</button>
             </div>
           </div>
         `;
@@ -293,8 +401,8 @@ function renderContent(data) {
   if (Array.isArray(data.experience)) {
     const timelineContainer = document.getElementById('timelineContainer');
     if (timelineContainer) {
-      timelineContainer.innerHTML = data.experience.map(item => `
-        <div class="timeline-item">
+      const itemsHtml = data.experience.map((item, idx) => `
+        <div class="timeline-item ${idx === 0 ? 'active' : ''}" data-scroll-reveal>
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">${escapeHtml(item.date)}</span>
@@ -303,18 +411,26 @@ function renderContent(data) {
           </div>
         </div>
       `).join('');
+
+      timelineContainer.innerHTML = `
+        <div class="timeline-laser-track" id="timelineLaserTrack">
+          <div class="timeline-laser-beam" id="timelineLaserBeam"></div>
+        </div>
+        ${itemsHtml}
+      `;
     }
   }
+
+  // Trigger reveal check after hydration
+  initScrollReveal();
 }
 
-// ─── Tech Stack Running Marquee Renderer ───
+// ─── 5. Tech Stack Running Marquee Renderer ───
 function renderTechMarquee(techList) {
   const container = document.getElementById('techMarqueeTrack');
   if (!container || !Array.isArray(techList)) return;
 
-  // Render items duplicated twice for infinite seamless CSS scroll
   const items = [...techList, ...techList];
-  
   container.innerHTML = items.map(tech => `
     <div class="tech-marquee-item">
       <i class="${getDeviconClass(tech)}"></i>
@@ -323,7 +439,7 @@ function renderTechMarquee(techList) {
   `).join('');
 }
 
-// ─── Interactive 3D Stone & Parallax Physics ───
+// ─── 6. 3D Stone Monolith Inertia Physics ───
 function initStone3DPhysics() {
   const hero = document.getElementById('home');
   const card = document.getElementById('stone3dCard');
@@ -337,13 +453,10 @@ function initStone3DPhysics() {
     const rect = hero.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
-    // Normalize coordinates: -1 to 1
     const normX = (x / rect.width) * 2 - 1;
     const normY = (y / rect.height) * 2 - 1;
-
-    targetX = normX * 16; // Max 16 deg Y-axis rotation
-    targetY = -normY * 14; // Max 14 deg X-axis rotation
+    targetX = normX * 16;
+    targetY = -normY * 14;
   }
 
   function onMouseLeave() {
@@ -352,7 +465,6 @@ function initStone3DPhysics() {
   }
 
   function updatePhysics() {
-    // Spring lerp interpolation
     currentX += (targetX - currentX) * 0.08;
     currentY += (targetY - currentY) * 0.08;
 
@@ -361,7 +473,7 @@ function initStone3DPhysics() {
     }
 
     if (headline) {
-      headline.style.transform = `translateX(${(-currentX * 0.35).toFixed(2)}px) translateY(${(-currentY * 0.35).toFixed(2)}px)`;
+      headline.style.transform = `translateX(${(-currentX * 0.3).toFixed(2)}px) translateY(${(-currentY * 0.3).toFixed(2)}px)`;
     }
 
     requestAnimationFrame(updatePhysics);
@@ -370,25 +482,97 @@ function initStone3DPhysics() {
   hero.addEventListener('mousemove', onMouseMove, { passive: true });
   hero.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
-  // Touch support for mobile devices
   hero.addEventListener('touchmove', (e) => {
     if (!e.touches[0]) return;
     const rect = hero.getBoundingClientRect();
     const touch = e.touches[0];
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    const normX = (x / rect.width) * 2 - 1;
-    const normY = (y / rect.height) * 2 - 1;
+    const normX = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+    const normY = ((touch.clientY - rect.top) / rect.height) * 2 - 1;
     targetX = normX * 10;
     targetY = -normY * 8;
   }, { passive: true });
 
   hero.addEventListener('touchend', onMouseLeave, { passive: true });
-
   updatePhysics();
 }
 
-// ─── Project Modal ───
+// ─── 7. Scroll Parallax & Progress Bar ───
+function initScrollParallax() {
+  const progressBar = document.getElementById('scrollProgressBar');
+  const stoneAnchor = document.getElementById('heroStoneAnchor');
+  const headlineLayer = document.querySelector('.hero-title-layer');
+  const heroBottomBar = document.getElementById('heroBottomBar');
+
+  function updateScrollState() {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
+    const pct = Math.round(progress * 100);
+
+    if (progressBar) progressBar.style.width = `${pct}%`;
+
+    // Cinematic Hero Parallax Exit (First 900px)
+    if (scrollY <= 900) {
+      if (stoneAnchor) {
+        stoneAnchor.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.28}px)) scale(${Math.max(1 - scrollY * 0.0003, 0.75)})`;
+        stoneAnchor.style.opacity = `${Math.max(1 - scrollY * 0.0016, 0)}`;
+      }
+      if (headlineLayer) {
+        headlineLayer.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.42}px))`;
+        headlineLayer.style.opacity = `${Math.max(1 - scrollY * 0.0018, 0)}`;
+      }
+      if (heroBottomBar) {
+        heroBottomBar.style.transform = `translateY(${scrollY * 0.2}px)`;
+        heroBottomBar.style.opacity = `${Math.max(1 - scrollY * 0.002, 0)}`;
+      }
+    }
+  }
+
+  if (lenis) {
+    lenis.on('scroll', updateScrollState);
+  } else {
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+  }
+  updateScrollState();
+}
+
+// ─── 8. Luminous Timeline Laser Beam Tracker ───
+function initTimelineLaser() {
+  const timeline = document.getElementById('timelineContainer');
+  const beam = document.getElementById('timelineLaserBeam');
+  if (!timeline || !beam) return;
+
+  function updateLaser() {
+    const rect = timeline.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    const startOffset = windowH * 0.75;
+    const totalH = rect.height;
+
+    const visibleTop = startOffset - rect.top;
+    const progress = Math.min(Math.max(visibleTop / totalH, 0), 1);
+
+    beam.style.height = `${(progress * 100).toFixed(1)}%`;
+
+    const items = timeline.querySelectorAll('.timeline-item');
+    items.forEach(item => {
+      const itemRect = item.getBoundingClientRect();
+      if (itemRect.top < windowH * 0.68) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  if (lenis) {
+    lenis.on('scroll', updateLaser);
+  } else {
+    window.addEventListener('scroll', updateLaser, { passive: true });
+  }
+  updateLaser();
+}
+
+// ─── 9. Project Modal ───
 function initModal() {
   const overlay = document.getElementById('projectModal');
   const closeBtn = document.getElementById('modalClose');
@@ -416,11 +600,13 @@ function openProjectModal(index) {
   const liveBtn = document.getElementById('modalLive');
   const repoBtn = document.getElementById('modalRepo');
 
+  const pImg = project.image || 'assets/projects/project_rag.jpg';
+  preview.innerHTML = `<img src="${pImg}" alt="${escapeHtml(project.title)}" onerror="this.src='assets/projects/project_dashboard.jpg'">`;
+
   tags.innerHTML = (project.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
   title.textContent = project.title || '';
   desc.textContent = project.fullDesc || project.shortDesc || '';
 
-  // Meta metadata
   const metaObj = {
     'Tahun': project.year || '-',
     'Peran': project.role || '-',
@@ -439,21 +625,23 @@ function openProjectModal(index) {
   repoBtn.href = project.repo || '#';
 
   overlay.classList.add('open');
+  if (lenis) lenis.stop();
   document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   const overlay = document.getElementById('projectModal');
   if (overlay) overlay.classList.remove('open');
+  if (lenis) lenis.start();
   document.body.style.overflow = '';
 }
 
 window.openProjectModal = openProjectModal;
 
-// ─── Navbar Scroll Effect ───
+// ─── 10. Navbar Scroll Effect ───
 function initNavbar() {
   const navbar = document.getElementById('navbar');
-  const links = document.querySelectorAll('.nav-link');
+  const links = document.querySelectorAll('.nav-links .nav-link');
   const sections = document.querySelectorAll('section[id]');
   if (!navbar) return;
 
@@ -470,11 +658,15 @@ function initNavbar() {
     });
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  if (lenis) {
+    lenis.on('scroll', onScroll);
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
   onScroll();
 }
 
-// ─── Mobile Menu ───
+// ─── 11. Mobile Menu ───
 function initMobileMenu() {
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -493,17 +685,9 @@ function initMobileMenu() {
   });
 }
 
-// ─── Scroll Reveal (IntersectionObserver) ───
+// ─── 12. Scroll Reveal (IntersectionObserver) ───
 function initScrollReveal() {
-  const revealSelectors = [
-    '.section-header',
-    '.about-grid',
-    '.skill-card',
-    '.project-featured',
-    '.project-card',
-    '.timeline-item',
-    '.cta-inner'
-  ];
+  const revealElements = document.querySelectorAll('[data-scroll-reveal], .section-header, .about-grid, .skill-card, .project-featured, .project-card, .manifesto-card, .cta-inner');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -512,14 +696,12 @@ function initScrollReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  revealSelectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => observer.observe(el));
-  });
+  revealElements.forEach(el => observer.observe(el));
 }
 
-// ─── Stat Counter Animation ───
+// ─── 13. Stat Counter Animation ───
 function initStatCounter() {
   const stats = document.querySelectorAll('.stat-number[data-target]');
   if (!stats.length) return;
@@ -552,14 +734,20 @@ function animateCount(el) {
   requestAnimationFrame(step);
 }
 
-// ─── Smooth Nav Scroll ───
+// ─── 14. Lenis Smooth Nav Scroll ───
 function initSmoothNav() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
+      const href = anchor.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -60, duration: 1.35 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
   });
