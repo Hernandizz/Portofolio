@@ -751,6 +751,19 @@ function initSmoothNav() {
       }
     });
   });
+
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => {
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -60, immediate: true });
+        } else {
+          target.scrollIntoView({ block: 'start' });
+        }
+      }, 200);
+    }
+  }
 }
 
 // ─── Utility ───
