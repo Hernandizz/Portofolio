@@ -7,15 +7,29 @@
   <meta name="description" content="Portfolio profesional Hernandes — Membangun Produk Digital yang Elegan & Fungsional. Informatika UNISSULA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="dark-theme">
+
+  <!-- ═══════════════ AMBIENT BACKGROUND & CURSOR GLOW ═══════════════ -->
+  <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+
 
   <!-- ═══════════════ NAVBAR ═══════════════ -->
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo" id="navLogo">HERNANDES.</a>
+      <div class="nav-brand-group">
+        <a href="#" class="nav-logo" id="navLogo">HERNANDES.</a>
+        <div class="nav-status-badge" title="Tersedia untuk peluang kerja & proyek baru">
+          <span class="status-pulse-dot"></span>
+          <span class="status-badge-text">Available for Hire</span>
+        </div>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -26,87 +40,136 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li><a href="/admin" class="nav-link" style="opacity: 0.7;">Admin ⚙️</a></li>
+        <li><a href="/admin" class="nav-link nav-admin-link">Admin ⚙️</a></li>
       </ul>
       <a href="#contact" class="btn btn-primary nav-cta">Hire Me</a>
     </div>
   </nav>
 
-  <!-- ═══════════════ HERO ═══════════════ -->
-  <section class="hero" id="home">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <h1 class="hero-headline animate-in" id="heroHeadline">
-          Membangun Produk Digital<br>
-          <span class="text-gold">yang Elegan</span> &amp; Fungsional
+  <!-- ═══════════════ HERO (CHAPTER 01: ORIGIN) ═══════════════ -->
+  <section class="hero hero-mineral" id="home" data-story-section="01">
+    <!-- Atmospheric Background Glow -->
+    <div class="hero-ambient-lights" id="heroAmbient">
+      <div class="ambient-glow glow-top"></div>
+      <div class="ambient-glow glow-center"></div>
+      <div class="ambient-glow glow-gold"></div>
+    </div>
+
+    <div class="hero-stage">
+      <!-- Eyebrow Badge Detail -->
+      <div class="hero-eyebrow-pill" id="heroEyebrow">
+        <span class="eyebrow-spark">✦</span>
+        <span class="eyebrow-text">FULL-STACK &amp; AI SYSTEMS ARCHITECT</span>
+      </div>
+
+      <!-- Massive Background Headline -->
+      <div class="hero-title-layer">
+        <h1 class="hero-massive-title" id="heroHeadline">
+          <span class="brand-word" id="heroBrandTitle">Hernandes</span>
         </h1>
-        <p class="hero-sub animate-in delay-1" id="heroSub">
-          Full-Stack Developer &amp; AI Enthusiast — merancang solusi digital
-          yang bersih, efisien, dan berdampak nyata.
-        </p>
-        <div class="hero-actions animate-in delay-2">
-          <a href="#projects" class="btn btn-outline" id="heroCta">Explore My Work</a>
-          <a href="assets/cv-hernandes.pdf" class="btn btn-ghost" download id="heroCv">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download CV
-          </a>
+      </div>
+
+      <!-- Center 3D Floating Mineral Stone -->
+      <div class="hero-stone-anchor" id="heroStoneAnchor">
+        <div class="stone-3d-card" id="stone3dCard">
+          <img src="assets/stone_hero.jpg" alt="Dark Mineral Monolith" class="stone-monolith-img" id="heroStoneImg">
         </div>
       </div>
-      <div class="hero-visual animate-in delay-1">
-        <div class="hero-blob"></div>
-        <div class="hero-portrait-frame">
-          <div class="hero-portrait" id="heroPortrait">
-            <!-- CSS-based portrait placeholder -->
-            <div class="portrait-avatar">
-              <div class="avatar-head"></div>
-              <div class="avatar-body"></div>
-              <div class="avatar-initials" id="heroInitials">H</div>
-            </div>
+
+      <!-- Bottom Layout Bar -->
+      <div class="hero-bottom-bar" id="heroBottomBar">
+        <!-- Left Microcopy -->
+        <div class="hero-col-left">
+          <div class="hero-micro-text" id="brandSubLeft">
+            <span class="micro-title">YOUR TRUSTED PARTNER</span>
+            <span class="micro-desc">IN FULL-STACK &amp; AI SYSTEMS</span>
           </div>
         </div>
-        <!-- Floating Badges -->
-        <div class="floating-badge badge-left animate-float">
-          <div class="badge-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8A96B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="badge-text">
-            <span class="badge-label" id="badgeLeftLabel">Available for</span>
-            <span class="badge-value" id="badgeLeftValue">Freelance</span>
+
+        <!-- Center Actions & Subtitle -->
+        <div class="hero-col-center">
+          <p class="hero-subheadline-text" id="heroSub">
+            Full-Stack Developer &amp; AI Systems Specialist — merancang solusi digital berpresisi tinggi.
+          </p>
+          <div class="hero-action-pills">
+            <a href="#projects" class="btn btn-primary btn-glow" id="heroCta">
+              <span>Explore Works</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="assets/cv-hernandes.pdf" class="btn btn-glass" download id="heroCv">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CV
+            </a>
           </div>
         </div>
-        <div class="floating-badge badge-right animate-float delay-2">
-          <div class="badge-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8A96B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="badge-text">
-            <span class="badge-label" id="badgeRightLabel">Projects Done</span>
-            <span class="badge-value" id="badgeRightValue">20+</span>
+
+        <!-- Right Microcopy & Stat -->
+        <div class="hero-col-right">
+          <div class="hero-micro-text text-right" id="brandStatRight">
+            <span class="micro-title">OVER TIME</span>
+            <span class="micro-desc text-gold">+ 20+ SHIPPED PROJECTS</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="hero-scroll-hint">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+
+    <!-- Scroll Down Pill -->
+    <a href="#about" class="hero-scroll-pill" aria-label="Scroll ke About">
+      <span class="scroll-icon-dot"></span>
+      <span class="scroll-label">SCROLL STORY</span>
+    </a>
+  </section>
+
+  <!-- ═══════════════ STORY MANIFESTO 1 ═══════════════ -->
+  <div class="story-manifesto" data-scroll-reveal>
+    <div class="container">
+      <div class="manifesto-card">
+        <span class="manifesto-tag">CHAPTER 01 / ETHOS</span>
+        <h3 class="manifesto-quote">
+          "Software engineering is the discipline of sculpting raw logic into resilient, intuitive, and high-performance digital experiences."
+        </h3>
+        <p class="manifesto-author">— Hernandes, Full-Stack &amp; AI Specialist</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ TECH STACK RUNNING MARQUEE ═══════════════ -->
+  <section class="tech-marquee-section" id="techStackSection">
+    <div class="tech-marquee-header">
+      <span class="tech-marquee-badge">TECH STACK &amp; ECOSYSTEM</span>
+    </div>
+    <div class="marquee-container">
+      <div class="marquee-track" id="techMarqueeTrack">
+        <!-- Rendered dynamically by main.js with Devicon icons -->
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════════ ABOUT ═══════════════ -->
-  <section class="section about" id="about">
+  <!-- ═══════════════ ABOUT (CHAPTER 02: NARRATIVE) ═══════════════ -->
+  <section class="section about" id="about" data-story-section="02">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Tentang Saya</span>
+      <div class="section-header" data-scroll-reveal>
+        <span class="section-tag">02 · Tentang Saya</span>
         <h2 class="section-title">Mengenal Lebih Dekat</h2>
       </div>
-      <div class="about-grid">
+      <div class="about-grid" data-scroll-reveal>
         <div class="about-photo-wrap">
-          <div class="about-photo">
-            <div class="portrait-avatar about-avatar">
-              <div class="avatar-head"></div>
-              <div class="avatar-body"></div>
-              <div class="avatar-initials" id="aboutInitials">H</div>
-            </div>
+          <div class="about-photo" id="aboutPhotoContainer">
+            <img src="assets/profile.jpg" alt="Hernandes" class="portrait-img" id="aboutPhoto" onerror="this.style.display='none'">
           </div>
           <div class="about-photo-accent"></div>
+          <!-- Floating Micro Badges -->
+          <div class="photo-floating-badge badge-top-right">
+            <span class="status-pulse-dot dot-sm"></span>
+            <span class="badge-text">Informatika · UNISSULA</span>
+          </div>
+          <div class="photo-floating-badge badge-bottom-left">
+            <span class="badge-icon-spark">⚡</span>
+            <div class="badge-details">
+              <span class="badge-title">Full-Stack &amp; AI</span>
+              <span class="badge-sub">High-Precision Systems</span>
+            </div>
+          </div>
         </div>
         <div class="about-text">
           <div id="aboutParagraphs">
@@ -129,7 +192,7 @@
           </div>
           <div class="about-stats" id="aboutStats">
             <div class="stat-item">
-              <span class="stat-number" data-target="3">3</span><span class="stat-suffix">+</span>
+              <span class="stat-number" data-target="4">4</span><span class="stat-suffix">+</span>
               <span class="stat-label">Tahun Pengalaman</span>
             </div>
             <div class="stat-item">
@@ -146,58 +209,87 @@
     </div>
   </section>
 
-  <!-- ═══════════════ SKILLS ═══════════════ -->
-  <section class="section skills" id="skills">
+  <!-- ═══════════════ STORY MANIFESTO 2 ═══════════════ -->
+  <div class="story-manifesto" data-scroll-reveal>
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Tech Stack</span>
+      <div class="manifesto-card">
+        <span class="manifesto-tag">CHAPTER 02 / CAPABILITY</span>
+        <h3 class="manifesto-quote">
+          "Bridging modern full-stack architectures with autonomous AI vector intelligence — crafted for precision and scale."
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SKILLS (CHAPTER 03: ARSENAL) ═══════════════ -->
+  <section class="section skills" id="skills" data-story-section="03">
+    <div class="container">
+      <div class="section-header" data-scroll-reveal>
+        <span class="section-tag">03 · Tech Stack</span>
         <h2 class="section-title">Keahlian &amp; Teknologi</h2>
       </div>
-      <div class="skills-grid" id="skillsGrid">
+      <div class="skills-grid" id="skillsGrid" data-scroll-reveal>
         <!-- Rendered dynamically by main.js -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ PROJECTS ═══════════════ -->
-  <section class="section projects" id="projects">
+  <!-- ═══════════════ STORY MANIFESTO 3 ═══════════════ -->
+  <div class="story-manifesto" data-scroll-reveal>
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Showcase</span>
+      <div class="manifesto-card">
+        <span class="manifesto-tag">CHAPTER 03 / MASTERY</span>
+        <h3 class="manifesto-quote">
+          "Real-world impact measured by sub-second latency, robust APIs, and immersive, tactile user interfaces."
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PROJECTS (CHAPTER 04: SHOWCASE) ═══════════════ -->
+  <section class="section projects" id="projects" data-story-section="04">
+    <div class="container">
+      <div class="section-header" data-scroll-reveal>
+        <span class="section-tag">04 · Showcase</span>
         <h2 class="section-title">Proyek Unggulan</h2>
       </div>
 
       <!-- Featured Project -->
-      <div id="projectFeaturedContainer">
+      <div id="projectFeaturedContainer" data-scroll-reveal>
         <!-- Rendered dynamically by main.js -->
       </div>
 
       <!-- Project Grid -->
-      <div class="projects-grid" id="projectsGrid">
+      <div class="projects-grid" id="projectsGrid" data-scroll-reveal>
         <!-- Rendered dynamically by main.js -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ EXPERIENCE ═══════════════ -->
-  <section class="section experience" id="experience">
+  <!-- ═══════════════ EXPERIENCE (CHAPTER 05: JOURNEY) ═══════════════ -->
+  <section class="section experience" id="experience" data-story-section="05">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Perjalanan</span>
+      <div class="section-header" data-scroll-reveal>
+        <span class="section-tag">05 · Perjalanan</span>
         <h2 class="section-title">Pengalaman &amp; Riwayat</h2>
       </div>
       <div class="timeline" id="timelineContainer">
-        <!-- Rendered dynamically by main.js -->
+        <!-- Interactive Luminous Laser Track -->
+        <div class="timeline-laser-track" id="timelineLaserTrack">
+          <div class="timeline-laser-beam" id="timelineLaserBeam"></div>
+        </div>
+        <!-- Timeline items rendered dynamically by main.js -->
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ CTA ═══════════════ -->
-  <section class="section cta" id="contact">
+  <!-- ═══════════════ CTA (CHAPTER 06: GATEWAY) ═══════════════ -->
+  <section class="section cta" id="contact" data-story-section="06">
     <div class="container">
-      <div class="cta-inner">
+      <div class="cta-inner" data-scroll-reveal>
+        <span class="section-tag">06 · Kolaborasi</span>
         <h2 class="cta-title">Mari Berkolaborasi</h2>
-        <p class="cta-sub">Punya ide proyek menarik? Saya selalu terbuka untuk diskusi dan peluang baru.</p>
+        <p class="cta-sub">Punya ide proyek menarik atau kebutuhan sistem AI? Saya selalu terbuka untuk diskusi dan peluang baru.</p>
         <div class="cta-actions">
           <a href="mailto:hernandes@email.com" class="btn btn-primary btn-lg" id="ctaEmail">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -259,7 +351,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="modal-preview" id="modalPreview">
-        <!-- Project preview mockup frame goes here -->
+        <!-- Project preview image & frame rendered dynamically -->
       </div>
       <div class="modal-body">
         <div class="project-tags" id="modalTags"></div>
@@ -280,6 +372,8 @@
     </div>
   </div>
 
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
