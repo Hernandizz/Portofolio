@@ -216,6 +216,28 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   background: var(--text-white);
   color: #111111;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    75deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  transition: all 0.75s ease;
+  pointer-events: none;
+}
+.btn-primary.btn-glow:hover::after {
+  left: 150%;
 }
 .btn-primary.btn-glow:hover {
   background: var(--gold);
@@ -333,6 +355,12 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   justify-content: space-between;
 }
 
+.nav-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .nav-logo {
   font-family: var(--font-display);
   font-weight: 800;
@@ -351,6 +379,58 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   border-radius: 50%;
   margin-left: 4px;
   box-shadow: 0 0 8px var(--gold);
+}
+
+/* Status Indicator Pill */
+.nav-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 13px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #4ade80;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  user-select: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s var(--ease);
+}
+.nav-status-badge:hover {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(74, 222, 128, 0.5);
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.25);
+  transform: translateY(-1px);
+}
+
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  position: relative;
+  display: inline-block;
+}
+.status-pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(74, 222, 128, 0.6);
+  animation: pulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.status-pulse-dot.dot-sm {
+  width: 6px;
+  height: 6px;
+}
+@keyframes pulsePing {
+  0% { transform: scale(0.9); opacity: 1; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
 }
 
 .nav-links {
@@ -494,6 +574,48 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   align-items: center;
   justify-content: space-between;
   min-height: calc(100vh - 140px);
+}
+
+/* Eyebrow Pill Detail */
+.hero-eyebrow-pill {
+  position: relative;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(22, 22, 25, 0.75);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-full);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px var(--gold-glow-subtle);
+  margin-top: 10px;
+  transition: all 0.35s var(--ease);
+  user-select: none;
+}
+.hero-eyebrow-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-light);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 28px var(--gold-glow);
+}
+.eyebrow-spark {
+  color: var(--gold);
+  font-size: 0.85rem;
+  display: inline-block;
+  animation: sparkRotate 5s linear infinite;
+}
+@keyframes sparkRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
 }
 
 /* Massive Title Layer */
@@ -878,6 +1000,78 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   border-radius: calc(var(--r-2xl) + 8px);
   z-index: -1;
   pointer-events: none;
+}
+
+/* Floating Micro Badges on Photo */
+.photo-floating-badge {
+  position: absolute;
+  z-index: 4;
+  background: rgba(18, 18, 20, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 0, 0, 0.4);
+  border-radius: var(--r-lg);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.35s var(--ease);
+  pointer-events: auto;
+  user-select: none;
+}
+.photo-floating-badge:hover {
+  border-color: var(--border-gold);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 30px var(--gold-glow-subtle);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.photo-floating-badge.badge-top-right {
+  top: -14px;
+  right: -18px;
+  border-radius: var(--r-full);
+  padding: 6px 14px;
+  animation: floatSoft 5s ease-in-out infinite;
+}
+.photo-floating-badge.badge-top-right .badge-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+}
+
+.photo-floating-badge.badge-bottom-left {
+  bottom: -16px;
+  left: -20px;
+  animation: floatSoft 5s ease-in-out infinite 2.5s;
+}
+.badge-icon-spark {
+  font-size: 1.15rem;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+}
+.badge-details {
+  display: flex;
+  flex-direction: column;
+}
+.badge-title {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+.badge-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-top: 2px;
+  letter-spacing: 0.03em;
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .about-text {
@@ -1602,6 +1796,10 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
     grid-template-columns: 1fr;
     gap: 40px;
   }
+  .about-photo-wrap {
+    max-width: 360px;
+    margin: 0 auto;
+  }
   .about-photo {
     max-width: 340px;
     margin: 0 auto;
@@ -1620,6 +1818,22 @@ h3 { font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.3; }
   }
   .nav-toggle {
     display: flex;
+  }
+
+  .nav-status-badge .status-badge-text {
+    display: none;
+  }
+  .nav-status-badge {
+    padding: 6px;
+  }
+
+  .photo-floating-badge.badge-top-right {
+    right: 0;
+    top: -10px;
+  }
+  .photo-floating-badge.badge-bottom-left {
+    left: 0;
+    bottom: -10px;
   }
 
   .nav-links.active {
