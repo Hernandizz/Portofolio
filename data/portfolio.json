@@ -11,19 +11,6 @@
   },
   "hero": {
     "brandTitle": "Hernandes",
-    "heroImage": "assets/stone_hero.jpg",
-    "brandSubtitleLeft": "YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS",
-    "brandStatRight": "OVER TIME\n+ 20+ SHIPPED PROJECTS",
-    "floatingTech": [
-      "React",
-      "Next.js",
-      "Python AI",
-      "Node.js",
-      "FastAPI",
-      "PostgreSQL",
-      "Tailwind",
-      "Docker"
-    ],
     "subheadline": "Full-Stack Developer & AI Systems Specialist — merancang arsitektur digital berpresisi tinggi, solusi kecerdasan buatan, dan antarmuka web berkelas dunia.",
     "ctaText": "Explore Works",
     "ctaLink": "#projects"

@@ -142,20 +142,6 @@ function populateAllForms() {
   const brandInput = document.getElementById('heroBrandTitleInput');
   if (brandInput) brandInput.value = h.brandTitle || h.headline || '';
 
-  const imgInput = document.getElementById('heroImageInput');
-  if (imgInput) imgInput.value = h.heroImage || 'assets/stone_hero.jpg';
-
-  const subLeftInput = document.getElementById('heroBrandSubtitleLeft');
-  if (subLeftInput) subLeftInput.value = h.brandSubtitleLeft || 'YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS';
-
-  const statRightInput = document.getElementById('heroBrandStatRight');
-  if (statRightInput) statRightInput.value = h.brandStatRight || 'OVER TIME\n+ 20+ SHIPPED PROJECTS';
-
-  const techInput = document.getElementById('heroFloatingTechInput');
-  if (techInput) {
-    techInput.value = Array.isArray(h.floatingTech) ? h.floatingTech.join(', ') : 'React, Next.js, Python AI, Node.js, FastAPI, PostgreSQL, Tailwind, Docker';
-  }
-
   const subheadInput = document.getElementById('heroSubheadline');
   if (subheadInput) subheadInput.value = h.subheadline || '';
 
@@ -490,17 +476,8 @@ async function saveAllChanges() {
     tagline: document.getElementById('settingTagline').value.trim()
   };
 
-  const techRaw = (document.getElementById('heroFloatingTechInput')?.value || '')
-    .split(',')
-    .map(t => t.trim())
-    .filter(Boolean);
-
   adminData.hero = {
     brandTitle: document.getElementById('heroBrandTitleInput')?.value.trim() || 'Hernandes',
-    heroImage: document.getElementById('heroImageInput')?.value.trim() || 'assets/stone_hero.jpg',
-    brandSubtitleLeft: document.getElementById('heroBrandSubtitleLeft')?.value.trim() || 'YOUR TRUSTED PARTNER\nIN FULL-STACK & AI SYSTEMS',
-    brandStatRight: document.getElementById('heroBrandStatRight')?.value.trim() || 'OVER TIME\n+ 20+ SHIPPED PROJECTS',
-    floatingTech: techRaw.length ? techRaw : ['React', 'Next.js', 'Python AI', 'Node.js', 'FastAPI', 'PostgreSQL', 'Tailwind', 'Docker'],
     subheadline: document.getElementById('heroSubheadline')?.value.trim() || '',
     ctaText: document.getElementById('heroCtaText')?.value.trim() || 'Explore Works',
     ctaLink: document.getElementById('heroCtaLink')?.value.trim() || '#projects'
