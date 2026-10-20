@@ -288,7 +288,7 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
   animation: heroIn 1s var(--ease) 0.15s both;
 }
 .hero-title span {
-  background: linear-gradient(180deg, #ffffff 20%, #9a9aa2 110%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
